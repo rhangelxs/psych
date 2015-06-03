@@ -152,7 +152,7 @@ header <- paste("\\begin{",font.size,"} \\begin{table}[htdp]",
 \\begin{",tabular.environment,"}",sep="")
 header <- c(header,"{l",rep("r",nvar),"}\n")
 if (!is.null(align)) {
-  header <- c(header,align)
+  header <- c(header,align,"\n")
 }
 if(apa) header <- c(header,
 "\\multicolumn{",nvar,"}{l}{",heading,"}",
