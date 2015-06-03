@@ -6,7 +6,7 @@
 "df2latex" <- 
 function(x,digits=2,rowlabels=TRUE,apa=TRUE,short.names=TRUE,
 font.size ="scriptsize",big.mark=NULL, drop.na=TRUE, heading="A table from the psych package in R",
-caption="df2latex",label="default",char=FALSE,stars=FALSE,silent=FALSE,file=NULL,append=FALSE) {
+caption="df2latex",label="default",char=FALSE,stars=FALSE,silent=FALSE,file=NULL,append=FALSE,tabular.environment="tabularx",align=NULL) {
 #first set up the table
  nvar <- dim(x)[2]
  rname<- rownames(x)
@@ -14,7 +14,7 @@ comment <- paste("%", match.call())
 header <- paste("\\begin{",font.size,"} \\begin{table}[htdp]",
 "\\caption{",caption,"}
 \\begin{center}
-\\begin{tabular}",sep="")
+\\begin{",tabular.environment,"}",sep="")
 if(stars) {if(rowlabels) {
                header <- c(header,"{l",rep("S",(nvar)),"}\n")} else {header <- c(header,"{",rep("S",(nvar+1)),"}\n")}  } else {
               if(rowlabels) { header <- c(header,"{l",rep("r",(nvar)),"}\n")} else {header <- c(header,"{",rep("r",(nvar+1)),"}\n")}
@@ -22,6 +22,10 @@ if(stars) {if(rowlabels) {
 if(apa) {header <- c(header,
 "\\multicolumn{",nvar,"}{l}{",heading,"}",
 '\\cr \n \\hline ')
+if (!is.na(align)) {
+  header <- align
+}
+
 footer <- paste(" \\hline ")}  else {footer <- NULL}
 if (stars){
       footer <- paste(" \\hline 
@@ -31,7 +35,7 @@ if (stars){
     }else{
       footer <- paste(" \\hline ")}
 footer <- paste(footer,"
-\\end{tabular}
+\\end{",tabular.environment,"}"
 \\end{center}
 \\label{",label,"}
 \\end{table} 
