@@ -151,12 +151,13 @@ header <- paste("\\begin{",font.size,"} \\begin{table}[htdp]",
 \\begin{center}
 \\begin{",tabular.environment,"}",sep="")
 header <- c(header,"{l",rep("r",nvar),"}\n")
+if (!is.null(align)) {
+  header <- c(header,align)
+}
 if(apa) header <- c(header,
 "\\multicolumn{",nvar,"}{l}{",heading,"}",
 '\\cr \n \\hline ')
-if (!is.null(align)) {
-  header <- align
-}
+
 if(apa) {footer <- paste(" \\hline ")} 
 footer <- paste(footer,"
 \\end{",tabular.environment,"}
