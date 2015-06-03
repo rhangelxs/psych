@@ -150,8 +150,9 @@ header <- paste("\\begin{",font.size,"} \\begin{table}[htdp]",
 "\\caption{",caption,"}
 \\begin{center}
 \\begin{",tabular.environment,"}",sep="")
-header <- c(header,"{l",rep("r",nvar),"}\n")
-if (!is.null(align)) {
+if (is.null(align)) {
+  header <- c(header,"{l",rep("r",nvar),"}\n")
+} else {
   header <- c(header,align,"\n")
 }
 if(apa) header <- c(header,
