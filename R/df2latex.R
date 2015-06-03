@@ -130,7 +130,7 @@ if (!is.na(class(x)[2]) & class(x)[2]=="corr.test") {  #we already did the analy
 }
 
 "fa2latex" <- 
-function(f,digits=2,rowlabels=TRUE,apa=TRUE,short.names=FALSE,cumvar=FALSE,cut=0,big=.3,alpha=.05,font.size ="scriptsize", heading="A factor analysis table from the psych package in R",caption="fa2latex",label="default",silent=FALSE,file=NULL,append=FALSE) {
+function(f,digits=2,rowlabels=TRUE,apa=TRUE,short.names=FALSE,cumvar=FALSE,cut=0,big=.3,alpha=.05,font.size ="scriptsize", heading="A factor analysis table from the psych package in R",caption="fa2latex",label="default",silent=FALSE,file=NULL,append=FALSE,tabular.environment="tabularx",align=NULL) {
 if(class(f)[2] == "fa.ci") {
 if(is.null(f$cip)) {px <- f$cis$p} else {px <- f$cip}} else {px <- NULL}  #get the probabilities if we did fa.ci
 #if(class(f)[2] !="fa") f <- f$fa
@@ -149,14 +149,17 @@ comment <- paste("% Called in the psych package ", match.call())
 header <- paste("\\begin{",font.size,"} \\begin{table}[htdp]",
 "\\caption{",caption,"}
 \\begin{center}
-\\begin{tabular}",sep="")
+\\begin{",tabular.environment,"}",sep="")
 header <- c(header,"{l",rep("r",nvar),"}\n")
 if(apa) header <- c(header,
 "\\multicolumn{",nvar,"}{l}{",heading,"}",
 '\\cr \n \\hline ')
+if (!is.null(align)) {
+  header <- align
+}
 if(apa) {footer <- paste(" \\hline ")} 
 footer <- paste(footer,"
-\\end{tabular}
+\\end{",tabular.environment,"}
 \\end{center}
 \\label{",label,"}
 \\end{table} 
