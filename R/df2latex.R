@@ -22,7 +22,7 @@ if(stars) {if(rowlabels) {
 if(apa) {header <- c(header,
 "\\multicolumn{",nvar,"}{l}{",heading,"}",
 '\\cr \n \\hline ')
-if (!is.na(align)) {
+if (!is.null(align)) {
   header <- align
 }
 
