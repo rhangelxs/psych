@@ -35,7 +35,7 @@ if (stars){
     }else{
       footer <- paste(" \\hline ")}
 footer <- paste(footer,"
-\\end{",tabular.environment,"}"
+\\end{",tabular.environment,"}
 \\end{center}
 \\label{",label,"}
 \\end{table} 
